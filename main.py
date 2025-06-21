@@ -49,8 +49,8 @@ def generateCodeMap(offset: str) -> np.ndarray:
     offest_encoded = encodeString(offset)
     base = offest_encoded
     for i in range(26):
-        if (i + 1) not in base:
-            base.append(i + 1)
+        if i not in base:
+            base.append(i)
     map = []
     for _ in range(26):
         map.append(base)
