@@ -1,32 +1,32 @@
 import numpy as np
 
 CHAR_DICT = {
-    "a": 1,
-    "b": 2,
-    "c": 3,
-    "d": 4,
-    "e": 5,
-    "f": 6,
-    "g": 7,
-    "h": 8,
-    "i": 9,
-    "j": 10,
-    "k": 11,
-    "l": 12,
-    "m": 13,
-    "n": 14,
-    "o": 15,
-    "p": 16,
-    "q": 17,
-    "r": 18,
-    "s": 19,
-    "t": 20,
-    "u": 21,
-    "v": 22,
-    "w": 23,
-    "x": 24,
-    "y": 25,
-    "z": 26,
+    "a": 0,
+    "b": 1,
+    "c": 2,
+    "d": 3,
+    "e": 4,
+    "f": 5,
+    "g": 6,
+    "h": 7,
+    "i": 8,
+    "j": 9,
+    "k": 10,
+    "l": 11,
+    "m": 12,
+    "n": 13,
+    "o": 14,
+    "p": 15,
+    "q": 16,
+    "r": 17,
+    "s": 18,
+    "t": 19,
+    "u": 20,
+    "v": 21,
+    "w": 22,
+    "x": 23,
+    "y": 24,
+    "z": 25,
 }
 
 
@@ -35,6 +35,14 @@ def encodeString(input: str) -> list[int]:
     for char in input:
         code.append(CHAR_DICT[char])
     return code
+
+
+def decode_string(input: np.ndarray) -> str:
+    reversed_dict = {value: key for key, value in CHAR_DICT.items()}
+    text = ""
+    for char in input.tolist():
+        text += reversed_dict[char]
+    return text
 
 
 def generateCodeMap(offset: str) -> np.ndarray:
@@ -53,9 +61,25 @@ def generateCodeMap(offset: str) -> np.ndarray:
     return code_map
 
 
+def encrypt_string(offset: str, key: str, msg: str):
+    code_map = generateCodeMap(offset)
+    encoded_key = encodeString(key)
+    encoded_msg = encodeString(msg)
+    result = []
+
+    for i in range(len(encoded_msg)):
+        result.append(code_map[encoded_key[i % len(encoded_key)], encoded_msg[i]])
+
+    text = decode_string(np.array(result))
+    print(text)
+
+
 def main():
     print("Hello from verginia-crypto!")
-    print(generateCodeMap("ikhjg"))
+    offset = input("Offest: ")
+    key = input("Key: ")
+    msg = input("Message: ")
+    encrypt_string(offset, key, msg)
 
 
 if __name__ == "__main__":
