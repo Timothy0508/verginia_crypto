@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image: 'astral/uv'} }
+    agent { docker { image 'astral/uv'} }
     stages {
         stage('Install Dependencies') {
             steps {
