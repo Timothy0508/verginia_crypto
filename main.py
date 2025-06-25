@@ -72,6 +72,7 @@ def encrypt_string(offset: str, key: str, msg: str):
 
     text = decode_string(np.array(result))
     print(text)
+    return text
 
 
 def main():
@@ -79,7 +80,7 @@ def main():
     offset = input("Offest: ")
     key = input("Key: ")
     msg = input("Message: ")
-    encrypt_string(offset, key, msg)
+    return encrypt_string(offset, key, msg)
 
 
 if __name__ == "__main__":
