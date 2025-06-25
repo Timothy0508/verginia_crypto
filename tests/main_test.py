@@ -12,3 +12,11 @@ def test_decode_string():
     input_array = [7, 4, 11, 11, 14]  # Corresponds to "hello"
     expected_output = "hello"
     assert main.decode_string(np.array(input_array)) == expected_output
+
+
+def test_encrypt_string():
+    offset = "test"
+    key = "key"
+    msg = "hello"
+    expected_output = "offup"
+    assert main.encrypt_string(offset, key, msg) == expected_output
